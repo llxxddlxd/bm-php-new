@@ -109,7 +109,15 @@ class Operation{
      */
     public function setCreateAccount($createAccount)
     {
-        $this->createAccount = $createAccount;
+
+        $temp = new \src\model\response\result\data\AccountActiviateInfo();
+        $temp->setDestAddress(isset($createAccount->dest_address)?$createAccount->dest_address:"");
+        $temp->setContract(isset($createAccount->contract)?$createAccount->contract:"");
+        $temp->setPriv(isset($createAccount->priv)?$createAccount->priv:"");
+        $temp->setMetadatas(isset($createAccount->metadatas)?$createAccount->metadatas:"");
+        $temp->setInitBalance(isset($createAccount->init_balance)?$createAccount->init_balance:0);
+        $temp->setInitInput(isset($createAccount->init_input)?$createAccount->init_input:"");
+        $this->createAccount = $temp;
 
         return $this;
     }
@@ -129,7 +137,11 @@ class Operation{
      */
     public function setIssueAsset($issueAsset)
     {
-        $this->issueAsset = $issueAsset;
+        $temp = new \src\model\response\result\data\AssetIssueInfo();
+        $temp->setCode(isset($createAccount->code)?$createAccount->code:"");
+        $temp->setAmount(isset($createAccount->amount)?$createAccount->amount:0);
+
+        $this->issueAsset = $temp;
 
         return $this;
     }
@@ -149,6 +161,10 @@ class Operation{
      */
     public function setSendAsset($sendAsset)
     {
+        $temp = new \src\model\response\result\data\AssetSendInfo();
+        $temp->setDestAddress(isset($sendAsset->dest_address)?$sendAsset->dest_address:"");
+        $temp->setAsset(isset($sendAsset->token)?$sendAsset->token:"");
+        $temp->setInput(isset($sendAsset->input)?$sendAsset->input:"");
         $this->sendAsset = $sendAsset;
 
         return $this;
@@ -169,7 +185,12 @@ class Operation{
      */
     public function setSendBU($sendBU)
     {
-        $this->sendBU = $sendBU;
+        
+        $temp = new \src\model\response\result\data\BUSendInfo();
+        $temp->setDestAddress(isset($createAccount->dest_address)?$createAccount->dest_address:"");
+        $temp->setAmount(isset($createAccount->amount)?$createAccount->amount:"");
+        $temp->setInput(isset($createAccount->input)?$createAccount->input:"");
+        $this->sendBU = $temp;
 
         return $this;
     }
@@ -189,7 +210,13 @@ class Operation{
      */
     public function setSetMetadata($setMetadata)
     {
-        $this->setMetadata = $setMetadata;
+        $temp = new \src\model\response\result\data\AccountSetMetadataInfo();
+        $temp->setKey(isset($createAccount->key)?$createAccount->key:"");
+        $temp->setValue(isset($createAccount->value)?$createAccount->value:"");
+        $temp->setVersion(isset($createAccount->version)?$createAccount->version:0);
+        $temp->setDeleteFlag(isset($createAccount->delete_flag)?$createAccount->delete_flag:false);
+
+        $this->setMetadata = $temp;
 
         return $this;
     }
@@ -209,7 +236,13 @@ class Operation{
      */
     public function setSetPrivilege($setPrivilege)
     {
-        $this->setPrivilege = $setPrivilege;
+        $temp = new \src\model\response\result\data\AccountSetPrivilegeInfo();
+        $temp->setMasterWeight(isset($createAccount->master_weight)?$createAccount->master_weight:"");
+        $temp->setSigners(isset($createAccount->signers)?$createAccount->signers:"");
+        $temp->setTxThreshold(isset($createAccount->tx_threshold)?$createAccount->tx_threshold:"");
+        $temp->setTypeThresholds(isset($createAccount->type_thresholds)?$createAccount->type_thresholds:"");
+
+        $this->setPrivilege = $temp;
 
         return $this;
     }

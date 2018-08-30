@@ -7,7 +7,7 @@ namespace src\model\response;
 use src\model\response\BaseResponse;
 class ContractCheckValidResponse extends BaseResponse{
 
-    private $result; //BlockGetValidatorsResult
+    private $result; //ContractCheckValidResult
 
     /**
      * @return mixed
@@ -24,8 +24,8 @@ class ContractCheckValidResponse extends BaseResponse{
      */
     public function setResult($result)
     {
-        $resultOb = new \src\model\response\result\BlockGetValidatorsResult();
-        $resultOb->setValidators(isset($result->validators)?$result->validators:"");
+        $resultOb = new \src\model\response\result\ContractCheckValidResult();
+        $resultOb->setIsValid(isset($result->is_valid)?$result->is_valid:"");
 
         $this->result = $resultOb;
 

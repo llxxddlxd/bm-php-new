@@ -7,7 +7,7 @@ namespace src\model\response;
 use src\model\response\BaseResponse;
 class AccountGetNonceResponse extends BaseResponse{
 
-    private $result;
+    private $result; //AccountGetNonceResult
 
     /**
      * @return mixed

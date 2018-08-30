@@ -46,6 +46,10 @@ class AssetSendInfo{
      */
     public function setAsset($asset)
     {
+
+        $temp = new \src\model\response\result\data\AssetInfo();
+        $temp->setKey(isset($asset->key)?$asset->key:"");
+        $temp->setAmount(isset($asset->amount)?$asset->amount:0);
         $this->asset = $asset;
 
         return $this;

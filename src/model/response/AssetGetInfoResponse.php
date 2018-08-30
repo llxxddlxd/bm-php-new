@@ -24,7 +24,6 @@ class AssetGetInfoResponse extends BaseResponse{
      */
     public function setResult($result)
     {
-
         $temp =   new \src\model\response\result\AssetGetInfoResult();
         $temp->setAssets(isset($result->assets)?$result->assets:'');
         $this->result = $temp;

@@ -4,15 +4,15 @@
  * Date: 2018/08/08 10:00
  */
 namespace src\model\request;
-class BlockGetTransactionsRequest{
-    private $sourceAddress;
-    private $contractAddress;
-    private $code;
-    private $input;
-    private $contractBalance;
-    private $optType;
-    private $feeLimit;
-    private $gasPrice;
+class ContractCallRequest{
+    private $sourceAddress; //String
+    private $contractAddress;//String
+    private $code;//String
+    private $input;//String
+    private $contractBalance;//Long
+    private $optType;//Integer
+    private $feeLimit;//Long
+    private $gasPrice;//Long
 
     /**
      * @return mixed

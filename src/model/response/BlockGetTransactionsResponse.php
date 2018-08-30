@@ -25,7 +25,8 @@ class BlockGetTransactionsResponse extends BaseResponse{
     public function setResult($result)
     {
         $resultOb = new \src\model\response\result\BlockGetTransactionsResult();
-        $resultOb->setHeader(isset($result->header)?$result->header:"");
+        $resultOb->setTotalCount(isset($result->total_count)?$result->total_count:"");
+        $resultOb->setTransactions(isset($result->transactions)?$result->transactions:"");
 
         $this->result = $resultOb;
 

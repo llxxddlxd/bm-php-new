@@ -24,10 +24,11 @@ class TransactionGetInfoResponse extends BaseResponse{
      */
     public function setResult($result)
     {
-        // $resultOb = new \src\model\response\result\BlockGetValidatorsResult();
-        // $resultOb->setHeader(isset($result->header)?$result->header:"");
+        $resultOb = new \src\model\response\result\TransactionGetInfoResult();
+        $resultOb->setTotalCount(isset($result->total_count)?$result->total_count:"");
+        $resultOb->setTransactions(isset($result->transactions)?$result->transactions:"");
 
-        // $this->result = $resultOb;
+        $this->result = $resultOb;
 
         return $this;
     }

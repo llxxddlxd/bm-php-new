@@ -14,7 +14,7 @@ class AccountActiviateInfo{
     private $priv;// Priv priv
 
    
-    private $metadatas;//MetadataInfo[]  metadatas
+    private $metadatas=array();//MetadataInfo[]  metadatas
 
    
     private $initBalance;// Long init_balance
@@ -59,7 +59,11 @@ class AccountActiviateInfo{
      */
     public function setContract($contract)
     {
-        $this->contract = $contract;
+
+        $temp = new \src\model\response\result\data\ContractInfo();
+        $temp->setType(isset($contract->type)?$contract->type:0);
+        $temp->setPayload(isset($contract->payload)?$contract->payload:"");
+        $this->contract = $temp;
 
         return $this;
     }
@@ -79,7 +83,13 @@ class AccountActiviateInfo{
      */
     public function setPriv($priv)
     {
-        $this->priv = $priv;
+        $temp = new \src\model\response\result\data\Priv();
+        $temp->setMasterWeight(isset($priv->master_weight)?$priv->master_weight:0);
+        // var_dump($priv);
+        $temp->setSigners(isset($priv->signers)?$priv->signers:"");
+        // echo 3;exit;
+        $temp->setThreshold(isset($priv->thresholds)?$priv->thresholds:"");
+        $this->priv = $temp;
 
         return $this;
     }
@@ -99,8 +109,18 @@ class AccountActiviateInfo{
      */
     public function setMetadatas($metadatas)
     {
-        $this->metadatas = $metadatas;
+        if($metadatas){
+            foreach ($metadatas as $key => $value) {
+                $temp = new \src\model\response\result\data\MetadataInfo();
+                $temp->setKey(isset($contract->key)?$contract->key:"");
+                $temp->setValue(isset($contract->value)?$contract->value:"");
+                $temp->setVersion(isset($contract->version)?$contract->version:0);
+                array_push($this->metadatas , $temp);
+        
+            }
+        }
 
+        
         return $this;
     }
 

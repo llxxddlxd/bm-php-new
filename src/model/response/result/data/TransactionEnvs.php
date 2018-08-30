@@ -4,9 +4,6 @@
  */
 namespace src\model\response\result\data;
 class TransactionEnvs{   
-  
-  
-     
  
     private $transactionEnv; //TransactionEnv  transaction_env
    
@@ -26,7 +23,11 @@ class TransactionEnvs{
      */
     public function setTransactionEnv($transactionEnv)
     {
-        $this->transactionEnv = $transactionEnv;
+
+        $temp = new \src\model\response\result\data\TransactionEnv();
+        $temp->setTransaction(isset($transactionEnv->transaction_env)?$transactionEnv->transaction_env:"");
+        $temp->setTrigger(isset($transactionEnv->trigger)?$transactionEnv->trigger:"");
+        $this->transactionEnv = $temp;
 
         return $this;
     }

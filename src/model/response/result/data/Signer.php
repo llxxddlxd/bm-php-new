@@ -4,8 +4,8 @@
  */
 namespace src\model\response\result\data;
 class Signer{
-    private $address;//String
-    private $weight;//Long
+    private $address;//String  address
+    private $weight;//Long  weight
 
     public function Signer($address,$weight){
         $this->address = $address;

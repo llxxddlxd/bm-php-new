@@ -6,11 +6,11 @@ namespace src\model\response\result\data;// //
 class AccountSetPrivilegeInfo{ 
     private  $masterWeight;//String master_weight
 
-    private  $signers;//Signer[] signers
+    private  $signers=array();//Signer[] signers
 
     private  $txThreshold;//String tx_threshold
 
-    private  $typeThresholds;//TypeThreshold[] type_thresholds
+    private  $typeThresholds=array();//TypeThreshold[] type_thresholds
 
     /**
      * @return mixed
@@ -47,7 +47,15 @@ class AccountSetPrivilegeInfo{
      */
     public function setSigners($signers)
     {
-        $this->signers = $signers;
+        if($signers){
+            foreach ($signers as $key => $value) {
+                $temp = new \src\model\response\result\data\Signer();
+                $temp->setAddress(isset($value->address)?$value->address:"");
+                $temp->setWeight(isset($value->weight)?$value->weight:"");
+                array_push($this->signers ,$temp);
+            }
+        }
+        
 
         return $this;
     }
@@ -87,7 +95,14 @@ class AccountSetPrivilegeInfo{
      */
     public function setTypeThresholds($typeThresholds)
     {
-        $this->typeThresholds = $typeThresholds;
+        if($typeThresholds){
+            foreach ($typeThresholds as $key => $value) {
+                $temp = new \src\model\response\result\data\TypeThreshold();
+                $temp->setType(isset($value->type)?$value->type:"");
+                $temp->setThreshold(isset($value->threshold)?$value->threshold:"");
+                array_push($this->typeThresholds ,$temp);
+            }
+        }
 
         return $this;
     }

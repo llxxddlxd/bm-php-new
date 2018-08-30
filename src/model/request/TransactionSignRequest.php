@@ -6,9 +6,7 @@
 namespace src\model\request;
 class TransactionSignRequest{
     private $blob;
-    private $privateKeys; //string[]
-
-  
+    private $privateKeys=array(); //string[]
 
 
     /**
@@ -46,7 +44,12 @@ class TransactionSignRequest{
      */
     public function setPrivateKeys($privateKeys)
     {
-        $this->privateKeys = $privateKeys;
+        if($privateKeys){
+            foreach ($privateKeys as $key => $value) {
+                array_push($this->privateKeys , $value);
+            }
+        }
+        
 
         return $this;
     }

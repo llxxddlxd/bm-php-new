@@ -9,6 +9,7 @@ class TransactionEvaluateFeeRequest{
     private $operations;//BaseOperation[] 
     private $ceilLedgerSeq;//Long
     private $metadata;//String 
+    private $signatureNumber;//String 
 
    
 
@@ -110,6 +111,26 @@ class TransactionEvaluateFeeRequest{
     public function setMetadata($metadata)
     {
         $this->metadata = $metadata;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSignatureNumber()
+    {
+        return $this->signatureNumber;
+    }
+
+    /**
+     * @param mixed $signatureNumber
+     *
+     * @return self
+     */
+    public function setSignatureNumber($signatureNumber)
+    {
+        $this->signatureNumber = $signatureNumber;
 
         return $this;
     }

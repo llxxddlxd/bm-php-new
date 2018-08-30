@@ -8,7 +8,7 @@ use src\model\response\BaseResponse;
 class AccountGetInfoResponse extends BaseResponse{
 
     
-    private $result;
+    private $result; //AccountGetInfoResult
 
     /**
      * @return mixed

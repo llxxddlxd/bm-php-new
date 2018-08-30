@@ -7,7 +7,7 @@ namespace src\model\response;
 use src\model\response\BaseResponse;
 class ContractGetInfoResponse extends BaseResponse{
 
-    private $result; //BlockGetValidatorsResult
+    private $result; //ContractGetInfoResult
 
     /**
      * @return mixed
@@ -24,8 +24,8 @@ class ContractGetInfoResponse extends BaseResponse{
      */
     public function setResult($result)
     {
-        $resultOb = new \src\model\response\result\BlockGetValidatorsResult();
-        $resultOb->setValidators(isset($result->validators)?$result->validators:"");
+        $resultOb = new \src\model\response\result\ContractGetInfoResult();
+        $resultOb->setContract(isset($result->contract)?$result->contract:"");
 
         $this->result = $resultOb;
 

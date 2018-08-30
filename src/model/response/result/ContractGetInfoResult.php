@@ -26,7 +26,11 @@ class ContractGetInfoResult{
      */
     public function setContract($contract)
     {
-        $this->contract = $contract;
+
+        $resultOb = new \src\model\response\result\data\ContractInfo();
+        $resultOb->setType(isset($contract->type)?$contract->type:"");
+        $resultOb->setPayload(isset($contract->payload)?$contract->payload:"");
+        $this->contract = $resultOb;
 
         return $this;
     }

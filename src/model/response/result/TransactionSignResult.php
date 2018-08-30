@@ -24,7 +24,15 @@ class TransactionSignResult{
      */
     public function setSignatures($signatures)
     {
-        $this->signatures = $signatures;
+        if($signatures){
+            foreach ($signatures as $key => $value) {
+                $resultOb = new \src\model\response\result\data\Signature();
+                $resultOb->setSignData($value->sign_data);
+                $resultOb->setPublicKey($value->public_key);
+                array_push($this->signatures , $resultOb);
+            }
+        }
+        
 
         return $this;
     }

@@ -5,7 +5,7 @@
 namespace src\model\response\result;
 class BlockGetValidatorsResult{
 
-    private $validators;//ValidatorInfo[] 
+    private $validators=array();//ValidatorInfo[] 
 
     /**
      * @return mixed
@@ -29,7 +29,7 @@ class BlockGetValidatorsResult{
                 $privOb = new \src\model\response\result\data\ValidatorInfo();
                 $privOb->setAddress(isset($value->address)?$value->address:"");
                 $privOb->setPledgeCoinAmount(isset($value->pledge_coin_amount)?$value->pledge_coin_amount:0);
-                $this->validators[$key] = $privOb;
+                array_push($this->validators,$privOb);
 
             }   
         }

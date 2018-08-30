@@ -5,7 +5,7 @@
 namespace src\model\response\result;
 class TransactionEvaluateFeeResult{
 
-    private $txs;;//TestTx[]     txs
+    private $txs=array();//TestTx[]     txs
  
 
     /**
@@ -23,7 +23,16 @@ class TransactionEvaluateFeeResult{
      */
     public function setTxs($txs)
     {
-        $this->txs = $txs;
+        if($txs){
+            foreach ($txs as $key => $value) {
+
+                $temp = new \src\model\response\result\data\TestTx();
+                $temp->setTransactionEnv(isset($value->transaction_env)?$value->transaction_env:"");
+                array_push($this->txs,$txs);        
+
+                # code...
+            }
+        }
 
         return $this;
     }

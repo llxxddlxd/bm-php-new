@@ -6,7 +6,7 @@ namespace src\model\response;
 
 use src\model\response\BaseResponse;
 class AccountGetBalanceResponse extends BaseResponse{
-    private $result;
+    private $result; //AccountGetBalanceResult
 
     /**
      * @return mixed

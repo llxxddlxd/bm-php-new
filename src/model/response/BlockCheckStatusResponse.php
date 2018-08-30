@@ -25,7 +25,7 @@ class BlockCheckStatusResponse extends BaseResponse{
     public function setResult($result)
     {
         $resultOb = new \src\model\response\result\BlockCheckStatusResult();
-        $resultOb->setHeader(isset($result->header)?$result->header:"");
+        $resultOb->setIsSynchronous($result);
 
         $this->result = $resultOb;
 

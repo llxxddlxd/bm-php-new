@@ -7,9 +7,6 @@ class AssetKey{
     private $code;  //Integer   code
     private $issuer; //Long   issuer
 
-    
- 
-    }
 
     /**
      * @return mixed

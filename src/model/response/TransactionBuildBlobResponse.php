@@ -24,10 +24,11 @@
          */
         public function setResult($result)
         {
-            // $resultOb = new \src\model\response\result\BlockGetValidatorsResult();
-            // $resultOb->setHeader(isset($result->header)?$result->header:"");
+            $resultOb = new \src\model\response\result\TransactionBuildBlobResult();
+            $resultOb->setTransactionBlob(isset($result['transaction_blob'])?$result['transaction_blob']:"");
+            $resultOb->setHash(isset($result['hash'])?$result['hash']:"");
 
-            // $this->result = $resultOb;
+            $this->result = $resultOb;
 
             return $this;
         }

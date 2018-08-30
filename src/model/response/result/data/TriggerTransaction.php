@@ -6,10 +6,7 @@ namespace src\model\response\result\data;
 class TriggerTransaction{   
   
   
-     
- 
     private $hash; //string  hash
-    
 
     /**
      * @return mixed

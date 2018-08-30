@@ -20,7 +20,7 @@ class TransactionInfo{
     private  $metadata; //String metadata
 
 
-    private  $operations;//Operation[] operations
+    private  $operations=array();//Operation[] operations
  
 
     /**
@@ -138,7 +138,23 @@ class TransactionInfo{
      */
     public function setOperations($operations)
     {
-        $this->operations = $operations;
+        if($operations){
+            foreach ($operations as $key => $value) {
+                $temp = new \src\model\response\result\data\Operation();
+                $temp->setType(isset($value->type)?$value->type:0);
+                $temp->setSourceAddress(isset($value->source_address)?$value->source_address:'');
+                $temp->setMetadata(isset($value->metadata)?$value->metadata:'');
+                $temp->setCreateAccount(isset($value->create_account)?$value->create_account:'');
+                $temp->setIssueAsset(isset($value->issue_asset)?$value->issue_asset:'');
+                $temp->setSendAsset(isset($value->pay_asset)?$value->pay_asset:'');
+                $temp->setSendBU(isset($value->pay_coin)?$value->pay_coin:'');
+                $temp->setMetadata(isset($value->set_metadata)?$value->set_metadata:'');
+                $temp->setSetPrivilege(isset($value->set_privilege)?$value->set_privilege:'');
+                $temp->setLog(isset($value->log)?$value->log:'');
+                array_push($this->operations,$temp);
+            }
+        }
+        
 
         return $this;
     }

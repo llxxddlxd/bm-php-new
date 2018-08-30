@@ -6,7 +6,7 @@
 namespace src\model\request;
 class TransactionSubmitRequest{
     private $transactionBlob;
-    private $signatures; //Signature[]
+    private $signatures=array(); //Signature[]
 
   
 
@@ -47,7 +47,12 @@ class TransactionSubmitRequest{
      */
     public function setSignatures($signatures)
     {
-        $this->signatures = $signatures;
+        if($signatures){
+            foreach ($signatures as $key => $value) {
+                array_push($this->signatures , $value);
+            }
+        }
+        
 
         return $this;
     }

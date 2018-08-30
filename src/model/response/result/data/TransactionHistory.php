@@ -23,7 +23,7 @@ class TransactionHistory{
     private $ledgerSeq;//Long  ledger_seq
 
     
-    private $signatures;//Signature[]  signatures
+    private $signatures=array();//Signature[]  signatures
 
     
     private $transaction;//TransactionInfo  transaction
@@ -168,7 +168,15 @@ class TransactionHistory{
      */
     public function setSignatures($signatures)
     {
-        $this->signatures = $signatures;
+        if($signatures){
+            foreach ($signatures as $key => $value) {
+                $temp = new \src\model\response\result\data\Signature();
+                $temp->setSignData(isset($value->sign_data)?$value->sign_data:"");
+                $temp->setPublicKey(isset($value->public_key)?$value->public_key:"");
+                array_push($this->signatures, $temp);
+            }
+        }
+         
 
         return $this;
     }
@@ -188,7 +196,14 @@ class TransactionHistory{
      */
     public function setTransaction($transaction)
     {
-        $this->transaction = $transaction;
+        $temp = new \src\model\response\result\data\TransactionInfo();
+        $temp->setSourceAddress(isset($transaction->source_address)?$transaction->source_address:"");
+        $temp->setFeeLimit(isset($transaction->fee_limit)?$transaction->fee_limit:"");
+        $temp->setGasPrice(isset($transaction->gas_price)?$transaction->gas_price:"");
+        $temp->setNonce(isset($transaction->nonce)?$transaction->nonce:"");
+        $temp->setMetadata(isset($transaction->metadata)?$transaction->metadata:"");
+        $temp->setOperations(isset($transaction->operations)?$transaction->operations:"");
+        $this->transaction = $temp;
 
         return $this;
     }

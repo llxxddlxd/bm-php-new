@@ -3,7 +3,7 @@
  * @author [zjl] <[<email address>]>
  */
 namespace src\model\request;
-class BlockGetValidatorsRequest{
+class TransactionBuildBlobRequest{
     private $sourceAddress; //String 
     private $nonce;//Long 
     private $gasPrice;//Long 

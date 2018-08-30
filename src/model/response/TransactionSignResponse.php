@@ -25,7 +25,7 @@ class TransactionSignResponse extends BaseResponse{
     public function setResult($result)
     {
         $resultOb = new \src\model\response\result\TransactionSignResult();
-        $resultOb->setHeader(isset($result->header)?$result->header:"");
+        $resultOb->setSignatures(isset($result->signatures)?$result->signatures:"");
 
         $this->result = $resultOb;
 

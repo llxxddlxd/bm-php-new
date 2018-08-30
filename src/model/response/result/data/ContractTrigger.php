@@ -7,8 +7,6 @@ class ContractTrigger{
   
     private $transaction; //TriggerTransaction  transaction
 
-  
-
     /**
      * @return mixed
      */
@@ -24,8 +22,9 @@ class ContractTrigger{
      */
     public function setTransaction($transaction)
     {
-        $this->transaction = $transaction;
-
+        $temp = new \src\model\response\result\data\TriggerTransaction();
+        $temp->setHash(isset($transaction->hash)?$transaction->hash:"");
+        $this->transaction = $temp;
         return $this;
     }
 }

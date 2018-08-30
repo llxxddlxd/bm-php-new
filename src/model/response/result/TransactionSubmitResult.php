@@ -5,7 +5,7 @@
 namespace src\model\response\result;
 class TransactionSubmitResult{
      
-    private $hash;;//String     hash
+    private $hash;//String     hash
  
 
     /**

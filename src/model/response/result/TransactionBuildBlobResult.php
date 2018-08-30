@@ -5,7 +5,7 @@
 namespace src\model\response\result;
 class TransactionBuildBlobResult{
 
-    private $transactionBlob;;//String    transaction_blob
+    private $transactionBlob;//String    transaction_blob
     private $hash;//String   hash
     
  

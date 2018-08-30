@@ -4,8 +4,8 @@
  */
 namespace src\model\response\result\data;
 class TypeThreshold{
-    private $type;  //Integer
-    private $threshold; //Long
+    private $type;  //Integer  type
+    private $threshold; //Long  threshold
 
     public function TypeThreshold($type, $threshold) {
         $this->type = $type;

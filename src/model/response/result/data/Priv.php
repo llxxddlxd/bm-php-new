@@ -4,9 +4,9 @@
  */
 namespace src\model\response\result\data;
 class Priv{
-   private $masterWeight; //String
-   private $signers;  //Signer[]
-   private $threshold; //Threshold
+   private $masterWeight; //String  master_weight
+   private $signers=array();  //Signer[]   signers
+   private $threshold; //Threshold   thresholds
 
     /**
      * @return mixed
@@ -42,12 +42,15 @@ class Priv{
      * @return self
      */
     public function setSigners($signersob)
-    {
-        foreach ($signersob as $key => $value) {
-            $signersOb = new \src\model\response\result\data\Signer();
-            $signersOb->setAddress($value->address);
-            $signersOb->setWeight($value->weigth);
-            array_push($this->signers,$signersOb);
+    {   
+        // var_dump($signersob);exit;
+        if($signersob){
+            foreach ($signersob as $key => $value) {
+                $signersOb = new \src\model\response\result\data\Signer();
+                $signersOb->setAddress($value->address);
+                $signersOb->setWeight($value->weight);
+                array_push($this->signers,$signersOb);
+            }   
         }
 
         return $this;

@@ -7,7 +7,7 @@ use src\model\response\BaseResponse;
 */
 class AccountCheckValidResponse extends BaseResponse
 {
-   private $result;
+   private $result; //AccountCheckValidResult
 
     /**
      * @return mixed

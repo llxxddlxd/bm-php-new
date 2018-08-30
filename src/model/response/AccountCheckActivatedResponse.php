@@ -8,7 +8,7 @@ use src\model\response\BaseResponse;
 */
 class AccountCheckActivatedResponse extends BaseResponse
 {
-    private $result;
+    private $result; //AccountCheckActivatedResult
     function __construct(argument)
     {
         # code...

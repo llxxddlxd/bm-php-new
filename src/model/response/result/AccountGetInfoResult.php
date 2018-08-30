@@ -86,6 +86,7 @@ class AccountGetInfoResult {
     public function setPriv($priv)
     {
 
+        // var_dump($priv);exit;
         $privOb = new \src\model\response\result\data\Priv();
         $privOb->setMasterWeight(isset($priv->master_weight)?$priv->master_weight:"");
         if(isset($priv->signers))

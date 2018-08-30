@@ -25,8 +25,8 @@ class AssetInfo{
     public function setKey($key)
     {
         $temp = new \src\model\response\result\data\AssetKey();
-        $temp->setCode($key->code);
-        $temp->setIssuer($key->issuer)
+        $temp->setCode(isset($key->code)?$key->code:"");
+        $temp->setIssuer(isset($key->issuer)?$key->issuer:"");
         $this->key = $temp;
 
         return $this;

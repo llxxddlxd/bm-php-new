@@ -5,7 +5,7 @@
 namespace src\model\response\result\data;
 class Threshold{
     private $txThreshold;  //Long       tx_threshold
-    private $typeThresholds; //TypeThreshold[]      type_thresholds
+    private $typeThresholds=array(); //TypeThreshold[]      type_thresholds
 
     /**
      * @return mixed
