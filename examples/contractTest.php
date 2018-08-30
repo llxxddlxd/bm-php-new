@@ -1,5 +1,11 @@
 <?php
-// http://127.0.0.1/bumo-sdk-PHP/examples/contractTest.php?type=
+
+/**
+ * 用于测试contract中的所有接口
+ * test url:  http://127.0.0.1/bumo-sdk-PHP/examples/contractTest.php?type={$type}
+ */
+ 
+
 include_once dirname(dirname(__FILE__)). "/src/autoload.php";
 //声明单例模式
 $baseUrl = "http://seed1.bumotest.io:26002";
@@ -66,8 +72,9 @@ switch ($type) {
         }
  
         break;
+
+
     case 2://   该接口实现资产发行并触发合约，或仅触发合约
-    
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
         $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
@@ -192,12 +199,27 @@ switch ($type) {
         var_dump($ret->getResult()->getContractAddressInfos());exit;
         # code...
         break;  
-   case 6: 
+   case 6:  //检测账户地址的有效性
         $contract = $sdk->getContract();
         $ContractCheckValidRequest = new \src\model\request\ContractCheckValidRequest();
         $ContractCheckValidRequest->setContractAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
         $ret = $contract->checkValid($ContractCheckValidRequest);
         // var_dump($ret);
+        var_dump($ret);exit;
+        # code...
+        break; 
+   case 7:  //调试合约代码
+        $contract = $sdk->getContract();
+        $ContractCheckValidRequest = new \src\model\request\ContractCallRequest();
+        $ContractCheckValidRequest->setSourceAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $ContractCheckValidRequest->setContractAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
+        $ContractCheckValidRequest->setCode("");
+        $ContractCheckValidRequest->setInput("");
+        $ContractCheckValidRequest->setContractBalance("");
+        $ContractCheckValidRequest->setOptType(0);
+        $ContractCheckValidRequest->setFeeLimit(10000000);
+        $ContractCheckValidRequest->setGasPrice(1000);
+        $ret = $contract->call($ContractCheckValidRequest);
         var_dump($ret);exit;
         # code...
         break;  

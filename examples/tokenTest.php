@@ -1,5 +1,11 @@
 <?php
-// http://127.0.0.1/bumo-sdk-PHP/examples/tokenTest.php?type=
+
+/**
+ * 用于测试asset类、bu类中的所有接口
+ * test url:  http://127.0.0.1/bumo-sdk-PHP/examples/tokenTest.php?type={$type}
+ */
+
+
 include_once dirname(dirname(__FILE__)). "/src/autoload.php";
 
 //声明单例模式
@@ -93,7 +99,7 @@ switch ($type) {
             $AssetSendOperation->setSourceAddress($sourceAddress);
             $AssetSendOperation->setDestAddress($destAddress);
             $AssetSendOperation->setCode(1234);
-            $AssetSendOperation->setIssuer(5678);
+            $AssetSendOperation->setIssuer($sourceAddress);
             $AssetSendOperation->setAmount(1111);
             $object = $sdk->getAsset(); 
             $operation = $object->send($AssetSendOperation);
