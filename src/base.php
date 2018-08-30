@@ -6,15 +6,25 @@
 namespace src;
 
 //probuf需要的
-require "protobuf/vendor/autoload.php";
-require "protobuf/GPBMetadata/Common.php";
-require "protobuf/GPBMetadata/Chain.php";
-require "protobuf/Protocol/Transaction.php";
-require "protobuf/Protocol/Operation.php";
-require "protobuf/Protocol/OperationCreateAccount.php";
-require "protobuf/Protocol/AccountThreshold.php";
-require "protobuf/Protocol/AccountPrivilege.php";
-require "protobuf/Protocol/OperationSetMetadata.php";
+require "crypto/protobuf/vendor/autoload.php";
+require "crypto/protobuf/GPBMetadata/Common.php";
+require "crypto/protobuf/GPBMetadata/Chain.php";
+require "crypto/protobuf/Protocol/Transaction.php";
+require "crypto/protobuf/Protocol/Operation.php";
+require "crypto/protobuf/Protocol/OperationCreateAccount.php";
+require "crypto/protobuf/Protocol/AccountThreshold.php";
+require "crypto/protobuf/Protocol/AccountPrivilege.php";
+require "crypto/protobuf/Protocol/OperationSetMetadata.php";
+require "crypto/protobuf/Protocol/OperationPayCoin.php";
+require "crypto/protobuf/Protocol/Contract.php";
+require "crypto/protobuf/Protocol/OperationSetPrivilege.php";
+require "crypto/protobuf/Protocol/Signer.php";
+require "crypto/protobuf/Protocol/OperationTypeThreshold.php";
+require "crypto/protobuf/Protocol/OperationIssueAsset.php";
+require "crypto/protobuf/Protocol/OperationPayAsset.php";
+require "crypto/protobuf/Protocol/Asset.php";
+require "crypto/protobuf/Protocol/AssetKey.php";
+require "crypto/protobuf/Protocol/OperationLog.php";
 
 
 use Monolog\Logger;
@@ -25,19 +35,16 @@ use Google\Protobuf\Internal\GPBType;
 class base{
 
     private $alphabet;
-    private $requestBaseUrl ;
     public $logObject;
 
     function __construct(){
         //bumo 特殊
         $this->alphabet = '123456789AbCDEFGHJKLMNPQRSTuVWXYZaBcdefghijkmnopqrstUvwxyz';
-        $this->requestBaseUrl = "http://seed1.bumotest.io:26002/"; // 测试用;
-
 
         //服务器 日志模块        
         $log = new Logger('name');
         $date = date("Ymd");
-        $filepath= dirname(__DIR__).'/src/log/'.$date.'.log';
+        $filepath= dirname(__DIR__).'/src/loginfo/'.$date.'.log';
         // echo $filepath;exit;
         $log->pushHandler(new StreamHandler( $filepath, Logger::DEBUG));
         $this->logObject = $log;
@@ -46,9 +53,7 @@ class base{
     function getAlphabet(){
         return $this->alphabet;
     }
-    function getRequestBaseUrl(){
-        return $this->requestBaseUrl;
-    } 
+ 
 
 
 
@@ -250,64 +255,9 @@ class base{
     }
 
 
-     /**
-      * [baseTraction 基础的结构]
-      * @param  [type] $nonce         [description]
-      * @param  [type] $sourceAddress [description]
-      * @param  [type] $metaData      [description]
-      * @param  [type] $gasPrice      [description]
-      * @param  [type] $feeLimit      [description]
-      * @param  [type] $opMetaData    [description]
-      * @param  [type] $opType        [description]
-      * @return [type]                [description]
-      */
-     function baseTraction($nonce,$sourceAddress,$metaData,$gasPrice,$feeLimit,$opMetaData,$opType){
-        //1 Transaction
-        $this->logObject->addNotice("Transaction baseTraction Transaction start");
-        $tran = new \Protocol\Transaction();
-        $tran->setNonce(++$nonce);
-        $tran->setSourceAddress($sourceAddress);
-        $tran->setMetadata($metaData);
-        $tran->setGasPrice($gasPrice);
-        $tran->setFeeLimit($feeLimit);
-
-        //2 Operation
-        $this->logObject->addNotice("Transaction baseTraction opers start");
-        $opers = new RepeatedField(GPBType::MESSAGE, \Protocol\Operation::class);
-        $oper = new \Protocol\Operation();
-        $oper->setSourceAddress($sourceAddress);
-        $oper->setMetadata($opMetaData);
-        $oper->setType($opType);/*           
-           UNKNOWN = 0;
-           CREATE_ACCOUNT = 1;
-           ISSUE_ASSET = 2;
-           PAY_ASSE = 3;
-           SET_METADATA = 4;
-           SET_SIGNER_WEIGHT = 5;
-           SET_THRESHOLD = 6;
-           PAY_COIN = 7;
-           LOG = 8;
-           SET_PRIVILEGE = 9;  */
-        $ret['tranasction'] = $tran;
-        $ret['operation'] = $oper;
-        return $ret;
-     }
+   
     
-     /**
-      * [fillData description]
-      * @param  [type] $transaction_blob [description]
-      * @param  [type] $sign_data        [description]
-      * @param  [type] $public_key       [description]
-      * @return [type]                   [description]
-      */
-    function fillData($transaction_blob,$sign_data,$public_key){
-        $temp['sign_data'] = $sign_data;
-        $temp['public_key'] = $public_key;
-        $ret["signatures"] = array();
-        array_push($ret["signatures"], $temp);
-        $ret['transaction_blob'] = $transaction_blob;
-        return $ret;
-    }
+    
 
      /**
      * [hexDecode description]
