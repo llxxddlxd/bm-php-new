@@ -13,5 +13,5 @@
 2.sign(多入参、单数组出参)与signObject（入参出参皆对象，与原文档一样）
 3.submit(多入参、单数组出参)与submitObject（入参出参皆对象，与原文档一样）
 
->>针对第一种的测试用例，请看：account\setMetadata()接口，例子：accountTest.php?type=3
->>针对第二种的测试用例，请看：account\activate()接口，例子：accountTest.php?type=2
+><br>针对第一种的测试用例，请看：account\setMetadata()接口，例子：accountTest.php?type=3
+><br>针对第二种的测试用例，请看：account\activate()接口，例子：accountTest.php?type=2
