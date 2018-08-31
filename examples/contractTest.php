@@ -4,7 +4,6 @@
  * 用于测试contract中的所有接口
  * test url:  http://127.0.0.1/bumo-sdk-PHP/examples/contractTest.php?type={$type}
  */
- 
 
 include_once dirname(dirname(__FILE__)). "/src/autoload.php";
 //声明单例模式
@@ -45,7 +44,6 @@ switch ($type) {
             $contractCreateOperation->setMetaData("create contract");
             $operation = $contract->create($contractCreateOperation);
 
-
             $metadata = $opMetaData = bin2hex('metaData');   
 
             $gasPrice = 1000;
@@ -77,8 +75,11 @@ switch ($type) {
     case 2://   该接口实现资产发行并触发合约，或仅触发合约
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
-        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
-        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
+        $sourcePriKey = "privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq";
+        $account = $sdk->getAccount();
+        $sourceAddress = $account->getAddressByPrivateKey($sourcePriKey);
+        // echo $sourceAddress;exit;
+        $descAddress = "buQd7e8E5XMa7Yg6FJe4BeLWfqpGmurxzZ5F";
         //1获取nonce
         {
             $AccountGetNonceRequest = new \src\model\request\AccountGetNonceRequest();
@@ -87,20 +88,20 @@ switch ($type) {
             $nonce = $retNonce->getResult()->getNonce();
         }
         {
+            
             //2.1构造基础的数据结构  
             $contractCreateOperation = new \src\model\request\operation\ContractInvokeByAssetOperation();
             $initBalance = 10000000;
             $contractCreateOperation->setSourceAddress($sourceAddress);
             $contractCreateOperation->setContractAddress("buQd7e8E5XMa7Yg6FJe4BeLWfqpGmurxzZ5F");
             $contractCreateOperation->setCode("TST");
-            $contractCreateOperation->setIssuer($sourceAddress);
+            $contractCreateOperation->setIssuer("buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp");
             $contractCreateOperation->setAssetAmount($initBalance);//激活并实现资产发行，如果=0，仅激活
             $contractCreateOperation->setInput("");
             $contractCreateOperation->setMetadata("invoke");
 
             $contract = $sdk->getContract();
             $operation = $contract->invokeByAsset($contractCreateOperation);
-
 
             $metadata = $opMetaData = bin2hex('metaData');   
 
@@ -133,8 +134,10 @@ switch ($type) {
     case 3: //该接口实现BU资产的发送和触发合约，或仅触发合约
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
-        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
-        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
+        $sourcePriKey = "privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq";
+        // $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
+        $account = $sdk->getAccount();
+        $sourceAddress = $account->getAddressByPrivateKey($sourcePriKey);
         //1获取nonce
         {
             $AccountGetNonceRequest = new \src\model\request\AccountGetNonceRequest();
@@ -147,7 +150,7 @@ switch ($type) {
             $contractCreateOperation = new \src\model\request\operation\ContractInvokeByBUOperation();
             $initBalance = 10000000;
             $contractCreateOperation->setSourceAddress($sourceAddress);
-            $contractCreateOperation->setContractAddress("buQd7e8E5XMa7Yg6FJe4BeLWfqpGmurxzZ5F");
+            $contractCreateOperation->setContractAddress($sourceAddress);
             $contractCreateOperation->setBuAmount($initBalance);//激活并实现资产发行，如果=0，仅激活
             $contractCreateOperation->setInput("");
 
@@ -202,7 +205,7 @@ switch ($type) {
    case 6:  //检测账户地址的有效性
         $contract = $sdk->getContract();
         $ContractCheckValidRequest = new \src\model\request\ContractCheckValidRequest();
-        $ContractCheckValidRequest->setContractAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $ContractCheckValidRequest->setContractAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $ret = $contract->checkValid($ContractCheckValidRequest);
         // var_dump($ret);
         var_dump($ret);exit;
@@ -211,8 +214,8 @@ switch ($type) {
    case 7:  //调试合约代码
         $contract = $sdk->getContract();
         $ContractCheckValidRequest = new \src\model\request\ContractCallRequest();
-        $ContractCheckValidRequest->setSourceAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
-        $ContractCheckValidRequest->setContractAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
+        $ContractCheckValidRequest->setSourceAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
+        $ContractCheckValidRequest->setContractAddress("buQd7e8E5XMa7Yg6FJe4BeLWfqpGmurxzZ5F");
         $ContractCheckValidRequest->setCode("");
         $ContractCheckValidRequest->setInput("");
         $ContractCheckValidRequest->setContractBalance("");
@@ -220,7 +223,7 @@ switch ($type) {
         $ContractCheckValidRequest->setFeeLimit(10000000);
         $ContractCheckValidRequest->setGasPrice(1000);
         $ret = $contract->call($ContractCheckValidRequest);
-        var_dump($ret);exit;
+        var_dump($ret->getResult());exit;
         # code...
         break;  
 

@@ -5,7 +5,6 @@
  * test url:  http://127.0.0.1/bumo-sdk-PHP/examples/logTest.php?type={$type}
  */
 
-
 include_once dirname(dirname(__FILE__)). "/src/autoload.php";
 
 //声明单例模式

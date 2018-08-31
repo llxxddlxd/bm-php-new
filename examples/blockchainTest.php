@@ -18,7 +18,7 @@ switch ($type) {
     case 1://查询最新的区块高度
         $object = $sdk->getBlock();
         $ret = $object->getNumber();
-        var_dump($ret->getresult()->getHeader());
+        var_dump($ret->getresult());
         exit;
         break;
     case 2: //检查本地节点区块是否同步完成
@@ -82,7 +82,7 @@ switch ($type) {
     case 10: //      获取指定区块中的账户最低资产限制和打包费用
         $object = $sdk->getBlock();
         $BlockGetFeesRequest = new \src\model\request\BlockGetFeesRequest();
-        $BlockGetFeesRequest->setBlockNumber(1001849);
+        $BlockGetFeesRequest->setBlockNumber(1046036);
         $ret = $object->getFees($BlockGetFeesRequest);
         var_dump($ret->getresult());exit;
         # code...
@@ -99,7 +99,7 @@ switch ($type) {
     case 23:  //  该接口实现交易的费用评估
         $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
         $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
-        $destAddress = "buQjSYyZyv2J5Tk92nKfakECJuayyRZozfCt";
+        $destAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
         $account = $sdk->getAccount();
         //1获取nonce
         {
@@ -122,18 +122,17 @@ switch ($type) {
             $createAccount->setAmount(1000000); 
 
             $oper = new \Protocol\Operation();
-            $oper->setSourceAddress($sourceAddress);
+            // $oper->setSourceAddress($sourceAddress);
             $oper->setType(7);/*                      UNKNOWN = 0;             CREATE_ACCOUNT = 1;           ISSUE_ASSET = 2;           PAY_ASSE = 3;           SET_METADATA = 4;           SET_SIGNER_WEIGHT = 5;           SET_THRESHOLD = 6;           PAY_COIN = 7;           LOG = 8;           SET_PRIVILEGE = 9;  */
             $oper->setPayCoin($createAccount);
+            $opers[0] = $oper;
    
         }
-        $BlockGetFeesRequest->setOperations($oper);
+        $BlockGetFeesRequest->setOperations($opers);
 
-
-
-        $BlockGetFeesRequest->setCeilLedgerSeq(1001849);
-        $BlockGetFeesRequest->setMetadata("1001849");
-        $BlockGetFeesRequest->setSignatureNumber(1);
+        // $BlockGetFeesRequest->setCeilLedgerSeq(1001849);
+        // $BlockGetFeesRequest->setMetadata("1001849");
+        // $BlockGetFeesRequest->setSignatureNumber(1);
         $ret = $object->evaluateFee($BlockGetFeesRequest);
         var_dump($ret->getresult());exit;
         # code...
@@ -145,9 +144,7 @@ switch ($type) {
         $ret = $object->getInfo($TransactionGetInfoRequest);
         print_r($ret->getresult()->getTransactions()[0]->getTransaction()->getOperations()[0]->getCreateAccount());exit;
         # code...
-        break;  
-    
-    
+        break;      
     
     default:
         # code...

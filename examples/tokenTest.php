@@ -13,15 +13,13 @@ $baseUrl = "http://seed1.bumotest.io:26002";
 use src\SDK;
 $sdk = SDK::getInstance($baseUrl);
 
-
-
 $type = isset($_GET['type'])?$_GET['type']:1;
 switch ($type) {
     //asset相关
     case 1:  //该接口实现资产的发行
         $transaction = $sdk->getTransaction();
-        $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
       
         //1获取nonce
         {
@@ -77,8 +75,8 @@ switch ($type) {
     case 2: //该接口实现资产的转移
 
         $transaction = $sdk->getTransaction();
-        $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
         $destAddress = "buQjSYyZyv2J5Tk92nKfakECJuayyRZozfCt";
       
         //1获取nonce
@@ -93,12 +91,11 @@ switch ($type) {
         {
             //2.1构造基础的数据结构 激活帐户  
             $initBalance = 10000000; 
-            $metadata = bin2hex('metaData');            
- 
+            $metadata = bin2hex('metaData'); 
             $AssetSendOperation = new \src\model\request\operation\AssetSendOperation();
             $AssetSendOperation->setSourceAddress($sourceAddress);
             $AssetSendOperation->setDestAddress($destAddress);
-            $AssetSendOperation->setCode(1234);
+            $AssetSendOperation->setCode(50);
             $AssetSendOperation->setIssuer($sourceAddress);
             $AssetSendOperation->setAmount(1111);
             $object = $sdk->getAsset(); 
@@ -138,9 +135,9 @@ switch ($type) {
     case 3: // 获取账户指定资产信息
         $object = $sdk->getAsset(); 
         $AssetGetInfoRequest = new \src\model\request\AssetGetInfoRequest();
-        $AssetGetInfoRequest->setAddress("buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf");
+        $AssetGetInfoRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $AssetGetInfoRequest->setCode(123);
-        $AssetGetInfoRequest->setIssuer("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $AssetGetInfoRequest->setIssuer("buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf");
         $ret = $object->getInfo($AssetGetInfoRequest);
         var_dump($ret->getResult());exit;
         # code...
@@ -151,8 +148,8 @@ switch ($type) {
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
         $bu = $sdk->getBu();
-        $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
 
         //1获取nonce
         {
@@ -207,8 +204,8 @@ switch ($type) {
         // $transaction = $sdk->getTransaction();
         // $account = $sdk->getAccount();
         // $ctp10Token = $sdk->ctp10Token();
-        // $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        // $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        // $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        // $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
 
         // {
         //     //1获取nonce

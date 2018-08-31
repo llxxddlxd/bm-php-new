@@ -4,7 +4,7 @@
  * desc:用于测试account中的所有接口
  * test url:  http://127.0.0.1/bumo-sdk-PHP/examples/accountTest.php?type={$type}
  */
-
+ 
 include_once dirname(dirname(__FILE__)). "/src/autoload.php";
 
 //声明单例模式
@@ -26,11 +26,14 @@ switch ($type) {
         break;
     case 2://激活账号
         $transaction = $sdk->getTransaction();
+        $account = $sdk->getAccount();
         $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
         $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
+        $sourceAddress_1 = $account->getAddressByPrivateKey($sourcePriKey);
+// echo $sourceAddress.'    '.$sourceAddress_1;exit;
+
         //0生成新的账户
         {
-            $account = $sdk->getAccount();
             $retAddress = $account->create();   
         }
         //1获取nonce
@@ -101,8 +104,8 @@ switch ($type) {
     case 3://设置账户metadata消息
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
-        $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
         $destAddress = "buQjSYyZyv2J5Tk92nKfakECJuayyRZozfCt";
         
         //1获取nonce
@@ -157,8 +160,8 @@ switch ($type) {
     case 4://设置账户权限，包括设置账户权重，签名者权重，交易门限，指定交易门限
         $transaction = $sdk->getTransaction();
         $account = $sdk->getAccount();
-        $sourcePriKey = "privbz4GWB4kRbxHoZVGo5JY3AExg34338AT8s1f9aVXbZw3wC3dNDHB";
-        $sourceAddress = "buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds";
+        $sourcePriKey = "privbsQfZT2b5fDvgc1f6ghGVeZgxeGNrBrFTYN7xwg1UFvmoCbU2qUm";
+        $sourceAddress = "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3";
         $destAddress = "buQjSYyZyv2J5Tk92nKfakECJuayyRZozfCt";
         
         //1获取nonce
@@ -191,7 +194,7 @@ switch ($type) {
             $operation = $account->setPrivilege($AccountSetMetadataOperation);
 
             //2.2初始化基础数据+序列化
-            $metaData = $opMetaData=bin2hex('metaData');
+            $metaData = $opMetaData=('metaData');
             $gasPrice = 1000;
             $feeLimit = 10000000;
 
@@ -221,7 +224,7 @@ switch ($type) {
     case 5: // 获取账户指定资产数量
         $account = $sdk->getAccount();
         $AccountGetAssetsRequest = new \src\model\request\AccountGetAssetsRequest();
-        $AccountGetAssetsRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
+        $AccountGetAssetsRequest->setAddress("buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf");
         $ret = $account->getAssets($AccountGetAssetsRequest);
         var_dump($ret->getResult());exit;
         # code...
@@ -229,7 +232,7 @@ switch ($type) {
     case 6: //检测账户地址的有效性
         $account = $sdk->getAccount();
         $AccountCheckValidRequest = new \src\model\request\AccountCheckValidRequest();
-        $AccountCheckValidRequest->setAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $AccountCheckValidRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $ret = $account->checkValid($AccountCheckValidRequest);
         var_dump($ret);exit;
         # code...
@@ -237,7 +240,7 @@ switch ($type) {
     case 7: //获取账户信息，包括账户地址，账户余额，账户交易序列号，账户资产和账户权重        
         $account = $sdk->getAccount();
         $AccountGetInfoRequest = new \src\model\request\AccountGetInfoRequest();
-        $AccountGetInfoRequest->setAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $AccountGetInfoRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $ret = $account->getInfo($AccountGetInfoRequest);
         var_dump($ret);exit;
         # code...
@@ -245,7 +248,7 @@ switch ($type) {
     case 8: //查询账户交易序列号
         $account = $sdk->getAccount();
         $AccountGetNonceRequest = new \src\model\request\AccountGetNonceRequest();
-        $AccountGetNonceRequest->setAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $AccountGetNonceRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $ret = $account->getNonce($AccountGetNonceRequest);
         // var_dump($ret);
         var_dump($ret->getResult()->getNonce());exit;
@@ -254,7 +257,7 @@ switch ($type) {
     case 9: //获取账户余额
         $account = $sdk->getAccount();
         $AccountGetBalanceRequest = new \src\model\request\AccountGetBalanceRequest();
-        $AccountGetBalanceRequest->setAddress("buQnv2Ym4mCUyd4L9cvVAvBYaPF2Levt4Sds");
+        $AccountGetBalanceRequest->setAddress("buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3");
         $ret = $account->getBalance($AccountGetBalanceRequest);
         var_dump($ret->getResult()->getBalance());exit;
         # code...
