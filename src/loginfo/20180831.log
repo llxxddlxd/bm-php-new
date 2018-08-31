@@ -1,0 +1,22 @@
+[2018-08-31 14:02:43] name.WARNING: account construct [] []
+[2018-08-31 14:02:43] name.WARNING: account getNonce,address:buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3 [] []
+[2018-08-31 14:02:43] name.NOTICE: account,checkAddress:buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3 [] []
+[2018-08-31 14:02:43] name.NOTICE: account,ret:0 [] []
+[2018-08-31 14:02:43] name.WARNING: getNonce,result:{
+   "error_code" : 0,
+   "result" : {
+      "address" : "buQecWYFHemdH8s9bTYsWuk6bvdswnJJaCT3",
+      "assets_hash" : "ad67d57ae19de8068dbcd47282146bd553fe9f684c57c8c114453863ee41abc3",
+      "balance" : 14790873000,
+      "metadatas_hash" : "ad67d57ae19de8068dbcd47282146bd553fe9f684c57c8c114453863ee41abc3",
+      "nonce" : 29,
+      "priv" : {
+         "master_weight" : 1,
+         "thresholds" : {
+            "tx_threshold" : 1
+         }
+      }
+   }
+} [] []
+[2018-08-31 14:02:43] name.WARNING: transaction construct [] []
+[2018-08-31 14:02:44] name.WARNING: request_post,code:200 [] []
