@@ -125,7 +125,6 @@ class account extends base{
                 throw new \Exception($this->SdkError->errorDescArray['INVALID_DATAVERSION_ERROR']['errorDesc']);
             }
 
-
             $deleteFlag = $AccountSetMetadataOperation->getDeleteFlag();
             $metadata = $AccountSetMetadataOperation->getMetadata();
             $sourceAddress = $AccountSetMetadataOperation->getSourceAddress();
@@ -459,6 +458,10 @@ class account extends base{
             // echo $result;exit;
             $this->logObject->addWarning("getNonce,result:$result");
             $resultObject = json_decode($result); //转对象
+            if($resultObject->error_code ==4 ){
+                throw new  \Exception($address .' is not exist!');
+            }
+            //判断是否是首次
             if(isset($resultObject->result->nonce))
                 $AccountGetNonceResult->setNonce($resultObject->result->nonce);
             else
@@ -469,9 +472,7 @@ class account extends base{
 
             $errorCode = $AccountGetNonceResponse->getErrorCode();
             $errorDesc = $AccountGetNonceResponse->getErrorDesc();
-            if($errorCode ==4 ){
-                throw new  \Exception(is_null($errorDesc)?$address .' is not exist!':$errorDesc, 1);
-            }
+       
 
             return $AccountGetNonceResponse;
         }
@@ -537,7 +538,7 @@ class account extends base{
      */
     function getAssets($AccountGetAssetsRequest){
         $AccountGetAssetsResponse = new \src\model\response\AccountGetAssetsResponse();
-        $AccountGetAssetsResult = new \src\model\response\result\AccountGetAssetsResult();
+        // $AccountGetAssetsResult = new \src\model\response\result\AccountGetAssetsResult();
         try{
             if(!$AccountGetAssetsRequest){
                 throw new \Exception($this->SdkError->errorDescArray['REQUEST_NULL_ERROR']['errorDesc']);
@@ -577,7 +578,7 @@ class account extends base{
      */
     function getMetadata($AccountGetMetadataRequest){
         $AccountGetMetadataResponse = new \src\model\response\AccountGetMetadataResponse();
-        $AccountGetMetadataResult = new \src\model\response\result\AccountGetMetadataResult();
+        // $AccountGetMetadataResult = new \src\model\response\result\AccountGetMetadataResult();
         try{
             if(!$AccountGetMetadataRequest){
                 throw new \Exception($this->SdkError->errorDescArray['REQUEST_NULL_ERROR']['errorDesc']);
@@ -840,6 +841,30 @@ class account extends base{
         else{
             return -3;
         }
+
+    }
+    /**
+     * [checkPublicKey description]
+     * @param  [type] $publicKey [description]
+     * @return [type]            [description]
+     */
+    public function getAddressByPrivateKey($privateKey){
+        if(!$privateKey){
+            return -1;
+        }
+        //1解密
+        $privateKeyRet = $this->base58Decode($privateKey);
+        // var_dump(strlen($privateKeyRet));exit;
+        $rawPriKey = substr($privateKeyRet,4,32);
+        $privateKeyByteArr = $this->getBytes($rawPriKey);
+        
+        //0 生成初始数据
+        $this->rawPrivateKey = $rawPriKey;
+        $this->rawPublicKey  = $this->ED25519($this->rawPrivateKey);
+        //1 成地址
+        return $this->createAddress();      
+        exit;
+
 
     }
   

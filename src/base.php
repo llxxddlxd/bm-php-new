@@ -77,14 +77,14 @@ class base{
     /**
      * [ED25519Check description]
      */
-    function ED25519Check($byteStr){
-        // $status = ed25519_sign_open($message,  $myPublic, $signature);
-        // if($status==TRUE){
-        // success
-        // }
-        // else{
-        // fail
-        // }
+    function ED25519Check($message,  $myPublic, $signature){
+        $status = ed25519_sign_open($message,  $myPublic, $signature);
+        if($status){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
       /**
