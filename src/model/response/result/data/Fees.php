@@ -5,7 +5,7 @@
 namespace src\model\response\result\data;
 class Fees{
    private $baseReserve; //long base_reserve   
-   private $gasPrice;  //lgon gas_price
+   private $gasPrice;  //long gas_price
 
 
     /**

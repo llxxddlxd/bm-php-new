@@ -55,9 +55,7 @@ class TransactionGetInfoResult{
                 $temp->setErrorDesc(isset($value->error_desc)?$value->error_desc:'');
                 $temp->setHash(isset($value->hash)?$value->hash:'');
                 $temp->setLedgerSeq(isset($value->ledger_seq)?$value->ledger_seq:'');
-
-                $temp->setSignatures(isset($value->signatures)?$value->signatures:'');
-                
+                $temp->setSignatures(isset($value->signatures)?$value->signatures:'');                
                 $temp->setTransaction(isset($value->transaction)?$value->transaction:'');
                 $temp->setTxSize(isset($value->tx_size)?$value->tx_size:0);
                 array_push($this->transactions,$temp);

@@ -6,31 +6,22 @@ namespace src\model\response\result\data;
 class TransactionHistory{
     
     private $actualFee;//String  actual_fee
-
     
     private $closeTime;//Long  close_time
-
     
     private $errorCode;//Integer  error_code
-
     
     private $errorDesc;//String  error_desc
-
     
     private $hash;//String  hash
-
     
     private $ledgerSeq;//Long  ledger_seq
-
     
     private $signatures=array();//Signature[]  signatures
-
     
     private $transaction;//TransactionInfo  transaction
-
     
     private $txSize;//Long  tx_size
-
   
 
     /**

@@ -24,8 +24,12 @@ class ContractCallResponse extends BaseResponse{
      */
     public function setResult($result)
     {
+        // var_dump($result);exit;
         $resultOb = new \src\model\response\result\ContractCallResult();
-        $resultOb->setContractAddressInfos(isset($result->contract_address_infos)?$result->contract_address_infos:"");
+        $resultOb->setLogs(isset($result->logs)?$result->logs:"");
+        $resultOb->setQueryRets(isset($result->query_rets)?$result->query_rets:"");
+        $resultOb->setStat(isset($result->stat)?$result->stat:"");
+        $resultOb->setTxs(isset($result->txs)?$result->txs:"");
 
         $this->result = $resultOb;
 

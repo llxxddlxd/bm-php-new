@@ -6,8 +6,6 @@ namespace src\model\response\result;
 class BlockGetFeesResult{
     private $fees; //Fees fees
 
-   
-
     /**
      * @return mixed
      */

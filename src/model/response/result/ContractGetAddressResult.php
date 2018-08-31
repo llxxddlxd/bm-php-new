@@ -5,105 +5,38 @@
 namespace src\model\response\result;
 class ContractGetAddressResult{
 
-    private $logs;//JSONObject logs
-    private $queryRets;//JSONArray query_rets
-    private $stat;//ContractStat stat
-    private $txs=array();//TransactionEnvs[] txs
+   
+    private $contractAddressInfos=array();//List<ContractAddressInfo>  contract_address_infos
     
-
+ 
     /**
      * @return mixed
      */
-    public function getLogs()
+    public function getContractAddressInfos()
     {
-        return $this->logs;
+        return $this->contractAddressInfos;
     }
 
     /**
-     * @param mixed $logs
+     * @param mixed $contractAddressInfos
      *
      * @return self
      */
-    public function setLogs($logs)
+    public function setContractAddressInfos($contractAddressInfos)
     {
-        $this->logs = $logs;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQueryRets()
-    {
-        return $this->queryRets;
-    }
-
-    /**
-     * @param mixed $queryRets
-     *
-     * @return self
-     */
-    public function setQueryRets($queryRets)
-    {
-        $this->queryRets = $queryRets;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getStat()
-    {
-        return $this->stat;
-    }
-
-    /**
-     * @param mixed $stat
-     *
-     * @return self
-     */
-    public function setStat($stat)
-    {
-        $temp = new \src\model\response\result\data\ContractStat();
-        $temp->setApplyTime($stat->apply_time);
-        $temp->setMemoryUsage($stat->memory_usage);
-        $temp->setStackUsage($stat->stack_usage);
-        $temp->setStep($stat->stack_usage);
-        $this->stat = $temp;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getTxs()
-    {
-        return $this->txs;
-    }
-
-    /**
-     * @param mixed $txs
-     *
-     * @return self
-     */
-    public function setTxs($txs)
-    {
-        if($txs){
-            foreach ($txs as $key => $value) {
-                $temp = new \src\model\response\result\data\TransactionEnvs();
-                $temp->setTransactionEnv($value->transaction_env);
-                array_push($this->txs, $temp);
+        if($contractAddressInfos){
+            foreach ($contractAddressInfos as $key => $value) {
+                $temp = new \src\model\response\result\data\ContractAddressInfo();
+                $temp->setContractAddress($value->contract_address);
+                $temp->setOperationIndex($value->operation_index);
+                array_push($this->contractAddressInfos, $temp);
                 # code...
             }
         }
          
+
         return $this;
     }
-
-
 
 
 }

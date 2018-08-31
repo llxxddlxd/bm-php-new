@@ -4,7 +4,7 @@
  */
 namespace src\model\response\result;
 class AccountGetAssetsResult {
-    private $assets; //AssetInfo[]   assets
+    private $assets=array(); //AssetInfo[]   assets
    
 
     /**
@@ -22,13 +22,15 @@ class AccountGetAssetsResult {
      */
     public function setAssets($assets)
     {
-        foreach ($assets as $key => $value) {
-            $temp = new \src\model\response\result\data\AssetInfo();
-            $temp->setAmount($value->amount);
-            $temp->setKey($value->key);
+        if($assets){         
+            foreach ($assets as $key => $value) {
+                $temp = new \src\model\response\result\data\AssetInfo();
+                $temp->setAmount(isset($value->amount)?$value->amount:"");
+                $temp->setKey(isset($value->key)?$value->key:0);
+                array_push($this->assets ,$temp);
+            }   
         }
-        $this->assets = $assets;
-
+        
         return $this;
     }
 }
