@@ -63,7 +63,7 @@ class contract extends base{
             
             $createAccount = new \Protocol\OperationCreateAccount();
             $createAccount->setInitBalance($getInitBalance);
-            if(!$initInput)
+            if($initInput)
                 $createAccount->setInitInput($initInput);
             $accountThreshold = new \Protocol\AccountThreshold();
             $accountThreshold->setTxThreshold(1);
@@ -143,10 +143,10 @@ class contract extends base{
             //1数据结构
             $OperationPayAsset = new \Protocol\OperationPayAsset();
             $OperationPayAsset->setDestAddress($getContractAddress);
-            if(!$initInput)
+            if($initInput)
                 $OperationPayAsset->setInput($initInput);
 
-            if(!$getCode && !$getIssuer && !$getAssetAmount && $getAssetAmount>0){
+            if($getCode && $getIssuer && $getAssetAmount && $getAssetAmount>0){
                 $Asset = new \Protocol\Asset();
                 $AssetKey = new \Protocol\AssetKey();
                 $AssetKey->setCode($getCode);
@@ -214,7 +214,7 @@ class contract extends base{
             $OperationPayCoin = new \Protocol\OperationPayCoin();
             $OperationPayCoin->setDestAddress($getContractAddress);
             $OperationPayCoin->setAmount($getBuAmount);
-            if(!$initInput)
+            if($initInput)
                 $OperationPayCoin->setInput($initInput);
 
             //2

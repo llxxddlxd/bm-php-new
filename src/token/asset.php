@@ -56,9 +56,10 @@ class asset extends base{
 
             //2
             $oper = new \Protocol\Operation();
-            if(!$sourceAddress)
+            if($sourceAddress)
                 $oper->setSourceAddress($sourceAddress);
-            $oper->setMetadata($metadata);
+            if($metadata)
+                $oper->setMetadata($metadata);
             $opertype = 2;/*$AccountSetMetadataOperation->getOperationType(); UNKNOWN = 0;
                        CREATE_ACCOUNT = 1;
                        ISSUE_ASSET = 2;
@@ -141,9 +142,9 @@ class asset extends base{
 
             //2
             $oper = new \Protocol\Operation();
-            if(!$sourceAddress)
+            if($sourceAddress)
                 $oper->setSourceAddress($sourceAddress);
-            if(!$metadata)
+            if($metadata)
                 $oper->setMetadata($metadata);
             $opertype = 3;/*$AccountSetMetadataOperation->getOperationType(); UNKNOWN = 0;
                        CREATE_ACCOUNT = 1;

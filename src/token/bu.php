@@ -33,7 +33,7 @@ class bu extends base{
             $destAddress =$BUSendOperation->getDestAddress();
             $sdk = SDK::getInstance('');
             $account = $sdk->getAccount();            
-            if(!$destAddress || !$account->checkAddress($destAddress)){
+            if(!$destAddress && !$account->checkAddress($destAddress)){
                 throw new \Exception($this->SdkError->errorDescArray['INVALID_DESTADDRESS_ERROR']['errorDesc']);                
             }
 

@@ -77,9 +77,9 @@ class account extends base{
             $createAccount->setPriv($accountPrivilege);
             //2operation 
             $oper = new \Protocol\Operation();
-            if(!$sourceAddress)
+            if($sourceAddress)
                 $oper->setSourceAddress($sourceAddress);
-            if(!$metadata)
+            if($metadata)
                 $oper->setMetadata($metadata);
             $oper->setType(1); //CREATE_ACCOUNT
             $oper->setCreateAccount($createAccount);
