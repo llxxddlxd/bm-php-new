@@ -1,4 +1,3 @@
-# bm-php-zjl
 ## php-sdk for bumo
 
 ## 需要注意地方
@@ -7,6 +6,7 @@
 3. 注意服务器日志的用户组与，src\loginfo，需要apache可操作
 4. 新添加base.php文件，基类
 5. 新添加autoload.php文件，自动加载所需文件
+6. 注意需要生成日志log，所以注意目录的权限
 
 ## 关于transaction 的修改
 1.buildBlob(多入参、单数组出参)与buildBlobObject（入参出参皆对象，与原文档一样)
